@@ -24,7 +24,7 @@ public struct JSKit {
 
     // MARK: - ok alert
 
-    func presentOkButtonAlert(with viewController: UIViewController, message m: String, title t: String = "",
+    public func presentOkButtonAlert(with viewController: UIViewController, message m: String, title t: String = "",
                               _ okHandler: ((UIAlertAction) -> Void)? = nil) {
         let alert = UIAlertController(title: t, message: m, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "확인", style: .default, handler: okHandler))
