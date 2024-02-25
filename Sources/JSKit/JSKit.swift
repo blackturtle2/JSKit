@@ -3,7 +3,7 @@
 
 public struct JSKit {
 
-    static let shared = JSKit()
+    public static let shared = JSKit()
 
     public init() {
 
