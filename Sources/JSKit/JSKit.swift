@@ -7,7 +7,7 @@ struct JSKit {
 
     }
 
-    func test() {
+    public func test() {
         print("Hello JSKit")
     }
 }
