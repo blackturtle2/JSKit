@@ -2,6 +2,10 @@ import UIKit
 import MessageUI
 import SafariServices
 
+/*
+ ***** ***** ***** ***** Add `P.U.B.L.I.C.` Access Control (접근제어) ***** ***** ***** *****
+ */
+
 public struct JSKit {
 
     public static let shared = JSKit()
