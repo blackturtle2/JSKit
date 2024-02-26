@@ -16,7 +16,7 @@ public struct JSKit {
 
     private var marketingVersion: String? = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
     private var buildNumber: String? = Bundle.main.infoDictionary?["CFBundleVersion"] as? String
-    private var appVersionText: String { "app version: \(self.marketingVersion ?? "") (\(self.buildNumber ?? ""))" }
+    public var appVersionText: String { "App version: \(self.marketingVersion ?? "") (\(self.buildNumber ?? ""))" }
     private var modelIdentifier: String {
         // ref: https://www.theiphonewiki.com/wiki/Models
         if let simulatorModelIdentifier = ProcessInfo().environment["SIMULATOR_MODEL_IDENTIFIER"] {
