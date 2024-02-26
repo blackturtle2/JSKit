@@ -58,7 +58,7 @@ public struct JSKit {
         }
     }
 
-    func presentOkCancelButtonAlert(with viewController: UIViewController,
+    public func presentOkCancelButtonAlert(with viewController: UIViewController,
                                     message m: String,
                                     title t: String = "",
                                     _ okHandler: ((UIAlertAction) -> Void)? = nil) {
@@ -74,7 +74,7 @@ public struct JSKit {
     // MARK: - Center Activity Indicator
 
     /// ref: https://stackoverflow.com/questions/38457750/use-activity-indicator-in-many-vc-without-duplicating-code-swift
-    func presentCenterActivityIndicator() {
+    public func presentCenterActivityIndicator() {
         DispatchQueue.main.async {
             var keyWindow: UIWindow? {
                 UIApplication
@@ -110,7 +110,7 @@ public struct JSKit {
         }
     }
 
-    func hideCenterActivityIndicator() {
+    public func hideCenterActivityIndicator() {
         DispatchQueue.main.async {
             var keyWindow: UIWindow? {
                 UIApplication
