@@ -1,5 +1,6 @@
 import UIKit
 import MessageUI
+import SafariServices
 
 public struct JSKit {
 
@@ -64,7 +65,7 @@ public struct JSKit {
         }
     }()
 
-    public func presentOkButtonAlert(with viewController: UIViewController,
+    public func presentOkButtonAlert(with parentVC: UIViewController,
                                      message m: String,
                                      title t: String = "",
                                      _ okHandler: ((UIAlertAction) -> Void)? = nil) {
@@ -72,11 +73,11 @@ public struct JSKit {
         alert.addAction(UIAlertAction(title: self.okButtonTitle, style: .default, handler: okHandler))
 
         DispatchQueue.main.async {
-            viewController.present(alert, animated: true, completion: nil)
+            parentVC.present(alert, animated: true, completion: nil)
         }
     }
 
-    public func presentOkCancelButtonAlert(with viewController: UIViewController,
+    public func presentOkCancelButtonAlert(with parentVC: UIViewController,
                                     message m: String,
                                     title t: String = "",
                                     _ okHandler: ((UIAlertAction) -> Void)? = nil) {
@@ -85,7 +86,7 @@ public struct JSKit {
         alert.addAction(UIAlertAction(title: self.okButtonTitle, style: .default, handler: okHandler))
 
         DispatchQueue.main.async {
-            viewController.present(alert, animated: true, completion: nil)
+            parentVC.present(alert, animated: true, completion: nil)
         }
     }
 
@@ -158,14 +159,14 @@ public struct JSKit {
                             title: String,
                             customBody body: String? = nil,
                             tintColor: UIColor? = nil,
-                            in parentViewController: UIViewController) {
+                            in parentVC: UIViewController) {
         let systemName = UIDevice.current.systemName
         let systemVersion = UIDevice.current.systemVersion // 현재 사용자 iOS 버전
         let appVersion = self.marketingVersion ?? ""
         let mailComposeVC = MFMailComposeViewController()
 
         /// Delegate: 메일 보내기 Finish 이후의 액션 정의를 위한 Delegate
-        mailComposeVC.mailComposeDelegate = parentViewController as? MFMailComposeViewControllerDelegate
+        mailComposeVC.mailComposeDelegate = parentVC as? MFMailComposeViewControllerDelegate
 
         /// configure mail contents
         mailComposeVC.setToRecipients([emailAddress]) // 받는 사람 설정
@@ -186,8 +187,42 @@ public struct JSKit {
 
         /// 사용자 아이폰의 메일 주소 세팅 여부 체크
         if MFMailComposeViewController.canSendMail() {
-            parentViewController.present(mailComposeVC, animated: true, completion: nil)
+            parentVC.present(mailComposeVC, animated: true, completion: nil)
         } // else: iOS 에서 자체적으로 메일 주소를 세팅하라는 메시지를 띄웁니다.
+    }
+
+    // MARK: - Present SafariView
+
+    /// SFSafariViewController를 띄우는 함수
+    /// - Parameters:
+    ///   - parentView: 띄우기를 원하는 마더 뷰
+    ///   - stringUrl: String 타입의 URL
+    ///   - completion: SFSafariViewController를 띄운 후, 작동할 completion
+    func presentSafariViewTo(_ stringUrl: String,
+                             tintColor: UIColor? = nil,
+                             in parentVC: UIViewController,
+                             completion: (() -> Void)? = nil) {
+        guard let url = URL(string: stringUrl) else { return }
+
+        let safariViewController = SFSafariViewController(url: url)
+        if let tintColor {
+            safariViewController.preferredControlTintColor = tintColor
+        }
+
+        parentVC.present(safariViewController, animated: true, completion: completion)
+    }
+
+    // MARK: - Print Process Time (함수 구동 시간 측정하기)
+
+    /// 특정 function의 구동 시간을 측정하는 함수
+    /// - Parameter blockFunction: 측정이 필요한 함수 구현
+    /// - Returns: 콘솔에 processTime을 print 함
+    func printProcessTime(blockFunction: () -> Void) {
+        let startTime = CFAbsoluteTimeGetCurrent()
+        blockFunction()
+        let processTime = CFAbsoluteTimeGetCurrent() - startTime
+
+        self.PRINT_LOG(processTime, codeName: "processTime")
     }
 
 }
