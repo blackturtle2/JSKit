@@ -198,7 +198,7 @@ public struct JSKit {
     ///   - parentView: 띄우기를 원하는 마더 뷰
     ///   - stringUrl: String 타입의 URL
     ///   - completion: SFSafariViewController를 띄운 후, 작동할 completion
-    func presentSafariViewTo(_ stringUrl: String,
+    public func presentSafariViewTo(_ stringUrl: String,
                              tintColor: UIColor? = nil,
                              in parentVC: UIViewController,
                              completion: (() -> Void)? = nil) {
@@ -217,7 +217,7 @@ public struct JSKit {
     /// 특정 function의 구동 시간을 측정하는 함수
     /// - Parameter blockFunction: 측정이 필요한 함수 구현
     /// - Returns: 콘솔에 processTime을 print 함
-    func printProcessTime(blockFunction: () -> Void) {
+    public func printProcessTime(blockFunction: () -> Void) {
         let startTime = CFAbsoluteTimeGetCurrent()
         blockFunction()
         let processTime = CFAbsoluteTimeGetCurrent() - startTime
