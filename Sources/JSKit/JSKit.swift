@@ -1,10 +1,28 @@
 import UIKit
+import MessageUI
 
 public struct JSKit {
 
     public static let shared = JSKit()
 
     public init() {}
+
+    // MARK: - App Version
+
+    private var marketingVersion: String? = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
+    private var buildNumber: String? = Bundle.main.infoDictionary?["CFBundleVersion"] as? String
+    private var appVersionText: String { "app version: \(self.marketingVersion ?? "") (\(self.buildNumber ?? ""))" }
+    private var modelIdentifier: String {
+        // ref: https://www.theiphonewiki.com/wiki/Models
+        if let simulatorModelIdentifier = ProcessInfo().environment["SIMULATOR_MODEL_IDENTIFIER"] {
+            return simulatorModelIdentifier
+        }
+        var sysinfo = utsname()
+        uname(&sysinfo) // ignore return value
+        return String(bytes: Data(bytes: &sysinfo.machine,
+                                  count: Int(_SYS_NAMELEN)),
+                      encoding: .ascii)!.trimmingCharacters(in: .controlCharacters)
+    }
 
     /// 디버깅 시에 프린트를 보다 편하게 하기 위한 도구입니다.
     /// - Parameters:
@@ -128,6 +146,48 @@ public struct JSKit {
                 }
             }
         }
+    }
+
+    // MARK: - Send Email to Developer
+
+    /// 개발자에게 이메일 보내기 function // `import MessageUI` 필요
+    /// - Parameters:
+    ///   - emailAddress: String 타입의 이메일 주소
+    ///   - parentView: MFMailComposeViewController를 띄우기 원하는 마더 뷰
+    public func sendEmailTo(_ emailAddress: String,
+                            title: String,
+                            customBody body: String? = nil,
+                            tintColor: UIColor? = nil,
+                            in parentViewController: UIViewController) {
+        let systemName = UIDevice.current.systemName
+        let systemVersion = UIDevice.current.systemVersion // 현재 사용자 iOS 버전
+        let appVersion = self.marketingVersion ?? ""
+        let mailComposeVC = MFMailComposeViewController()
+
+        /// Delegate: 메일 보내기 Finish 이후의 액션 정의를 위한 Delegate
+        mailComposeVC.mailComposeDelegate = parentViewController as? MFMailComposeViewControllerDelegate
+
+        /// configure mail contents
+        mailComposeVC.setToRecipients([emailAddress]) // 받는 사람 설정
+        mailComposeVC.setSubject(title) // 메일 제목 설정
+
+        /// 메일 내용 설정
+        let customBodyText: String = {
+            guard let body else { return "" }
+            return "\n\(body)"
+        }()
+        mailComposeVC.setMessageBody("# \(self.modelIdentifier) / \(systemName) \(systemVersion) / App ver.\(appVersion)\(customBodyText)",
+                                     isHTML: false)
+
+        /// App의 tintColor와 맞추고자 하면, tintColor 설정
+        if let tintColor {
+            mailComposeVC.navigationBar.tintColor = tintColor
+        }
+
+        /// 사용자 아이폰의 메일 주소 세팅 여부 체크
+        if MFMailComposeViewController.canSendMail() {
+            parentViewController.present(mailComposeVC, animated: true, completion: nil)
+        } // else: iOS 에서 자체적으로 메일 주소를 세팅하라는 메시지를 띄웁니다.
     }
 
 }
