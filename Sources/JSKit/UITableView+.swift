@@ -9,7 +9,7 @@ import UIKit
 
 extension UITableView {
 
-    func setEmptyMessage(_ message: String) {
+    internal func setEmptyMessage(_ message: String) {
         let messageLabel = UILabel(frame: CGRect(x: 0, y: 0, width: self.bounds.size.width, height: self.bounds.size.height))
         messageLabel.text = message
         messageLabel.textColor = .label
@@ -22,7 +22,7 @@ extension UITableView {
         self.separatorStyle = .none
     }
 
-    func restore(separatorStyle: UITableViewCell.SeparatorStyle) {
+    internal func restore(separatorStyle: UITableViewCell.SeparatorStyle) {
         self.backgroundView = nil
         self.separatorStyle = separatorStyle
     }
