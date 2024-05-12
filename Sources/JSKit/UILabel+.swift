@@ -9,7 +9,7 @@ import UIKit
 
 extension UILabel {
 
-    public func setLineSpacing(lineSpacing: CGFloat = 0.0, lineHeightMultiple: CGFloat = 0.0) {
+    public func setLineSpacing(with lineSpacing: CGFloat = 0.0, lineHeightMultiple: CGFloat = 0.0) {
         guard let labelText = self.text else { return }
 
         let paragraphStyle = NSMutableParagraphStyle()
