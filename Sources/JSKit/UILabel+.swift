@@ -9,7 +9,7 @@ import UIKit
 
 extension UILabel {
 
-    func setLineSpacing(lineSpacing: CGFloat = 0.0, lineHeightMultiple: CGFloat = 0.0) {
+    public func setLineSpacing(lineSpacing: CGFloat = 0.0, lineHeightMultiple: CGFloat = 0.0) {
         guard let labelText = self.text else { return }
 
         let paragraphStyle = NSMutableParagraphStyle()
@@ -28,7 +28,7 @@ extension UILabel {
         self.attributedText = attributedString
     }
 
-    func bold(in ranges: [String], isBold: Bool) {
+    public func bold(in ranges: [String], isBold: Bool) {
         guard let text = self.text,
               let attributedText = self.attributedText else { return }
         let font = isBold ? UIFont.boldSystemFont(ofSize: self.font.pointSize) : UIFont.systemFont(ofSize: self.font.pointSize)
