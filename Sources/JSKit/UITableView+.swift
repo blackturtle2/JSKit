@@ -1,5 +1,5 @@
 //
-//  File.swift
+//  UITableView+.swift
 //  
 //
 //  Created by Leejaesung on 4/1/24.
