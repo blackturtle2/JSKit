@@ -1,0 +1,8 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+      "OK" : { "extractionState" : "manual", "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "OK" } }, "zh-HK" : { "stringUnit" : { "state" : "translated", "value" : "好的" } }, "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "好的" } }, "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "好的" } }, "ja" : { "stringUnit" : { "state" : "translated", "value" : "わかりました" } }, "ko" : { "stringUnit" : { "state" : "translated", "value" : "확인" } }, "vi" : { "stringUnit" : { "state" : "translated", "value" : "ĐƯỢC RỒI" } } } },
+      "Cancel" : { "extractionState" : "manual", "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "Cancel" } }, "zh-HK" : { "stringUnit" : { "state" : "translated", "value" : "取消" } }, "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "取消" } }, "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "取消" } }, "ja" : { "stringUnit" : { "state" : "translated", "value" : "キャンセル" } }, "ko" : { "stringUnit" : { "state" : "translated", "value" : "취소" } }, "vi" : { "stringUnit" : { "state" : "translated", "value" : "Hủy bỏ" } } } }
+  },
+  "version" : "1.0"
+}

@@ -46,35 +46,14 @@ public struct JSKit {
 #endif
     }
 
-    // MARK: - Ok and Cancel Button Alert
-
-    private let okButtonTitle: String = {
-        if #available(iOS 16, *) {
-            switch (Locale.current.language.languageCode ?? .english) {
-            case .korean: return "확인"
-            default: return "Ok"
-            }
-        } else {
-            return (Locale.current.languageCode ?? "en") == "kr" ? "확인" : "Ok"
-        }
-    }()
-    private let cancelButtonTitle: String = {
-        if #available(iOS 16, *) {
-            switch (Locale.current.language.languageCode ?? .english) {
-            case .korean: return "취소"
-            default: return "Cancel"
-            }
-        } else {
-            return (Locale.current.languageCode ?? "en") == "kr" ? "취소" : "Cancel"
-        }
-    }()
+    // MARK: - OK and Cancel Button Alert
 
     public func presentOkButtonAlert(with parentVC: UIViewController,
                                      message m: String,
                                      title t: String = "",
                                      _ okHandler: ((UIAlertAction) -> Void)? = nil) {
         let alert = UIAlertController(title: t, message: m, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: self.okButtonTitle, style: .default, handler: okHandler))
+        alert.addAction(UIAlertAction(title: String(localized: "OK"), style: .default, handler: okHandler))
 
         DispatchQueue.main.async {
             parentVC.present(alert, animated: true, completion: nil)
@@ -86,8 +65,8 @@ public struct JSKit {
                                     title t: String = "",
                                     _ okHandler: ((UIAlertAction) -> Void)? = nil) {
         let alert = UIAlertController(title: t, message: m, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: self.cancelButtonTitle, style: .cancel))
-        alert.addAction(UIAlertAction(title: self.okButtonTitle, style: .default, handler: okHandler))
+        alert.addAction(UIAlertAction(title: String(localized: "Cancel"), style: .cancel))
+        alert.addAction(UIAlertAction(title: String(localized: "OK"), style: .default, handler: okHandler))
 
         DispatchQueue.main.async {
             parentVC.present(alert, animated: true, completion: nil)
