@@ -49,9 +49,9 @@ public struct JSKit {
             let strMessage = String(describing: messsage)
 
             if strMessage.contains("\n") {
-                return ": 👇🏻\n🔻🔻🔻\n\(strMessage)\n🔺🔺🔺\n"
+                return ": 👇🏻\n🔻🔻🔻\n\(strMessage)\n🔺🔺🔺"
             } else {
-                return ": \(strMessage)\n"
+                return ": \(strMessage)"
             }
         }
 
