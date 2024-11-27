@@ -41,21 +41,21 @@ public struct JSKit {
                           function: String = #function) {
 #if DEBUG
         /// "\(Date()) \(#file.components(separatedBy: "/").last ?? "") \(#function) \(#line) 로그 내용"
-        let codeName = codeName == nil ? "" : "[\(codeName ?? "")] "
-        let function = function
-        let title = title == nil ? "" : "\(title ?? "")"
+        let codeName = codeName == nil ? "" : "[\(codeName ?? "")]"
+        let function = "[\(function)] "
+        let title = title == nil ? "" : "\(title ?? "") "
         var message: String {
             guard let messsage else { return "" }
             let strMessage = String(describing: messsage)
 
             if strMessage.contains("\n") {
-                return ": 🔻🔻🔻\n\(strMessage)\n🔺🔺🔺\n"
+                return ": 👇🏻\n🔻🔻🔻\n\(strMessage)\n🔺🔺🔺\n"
             } else {
                 return ": \(strMessage)\n"
             }
         }
 
-        print(">>>>> 🚗 \(codeName)\(function)\(title)\(message)")
+        print(">>>>> 📍 \(codeName)\(function)\(title)\(message)")
 #endif
     }
 
