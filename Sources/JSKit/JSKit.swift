@@ -42,8 +42,8 @@ public struct JSKit {
 #if DEBUG
         /// "\(Date()) \(#file.components(separatedBy: "/").last ?? "") \(#function) \(#line) 로그 내용"
         let codeName = codeName == nil ? "" : "[\(codeName ?? "")]"
-        let function = "[\(function)] "
-        let title = title == nil ? "" : "\(title ?? "") "
+        let function = "[\(function)]"
+        let title = title == nil ? "" : " \(title ?? "")"
         var message: String {
             guard let messsage else { return "" }
             let strMessage = String(describing: messsage)
