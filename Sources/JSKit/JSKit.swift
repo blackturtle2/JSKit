@@ -1,6 +1,7 @@
 import UIKit
 import MessageUI
 import SafariServices
+import DeviceKit
 
 /*
  ***** ***** ***** ***** Add `P.U.B.L.I.C.` Access Control (접근제어) ***** ***** ***** *****
@@ -11,23 +12,6 @@ public struct JSKit {
     public static let shared = JSKit()
 
     public init() {}
-
-    // MARK: - App Version
-
-    private var marketingVersion: String? = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
-    private var buildNumber: String? = Bundle.main.infoDictionary?["CFBundleVersion"] as? String
-    public var appVersionText: String { "App version: \(self.marketingVersion ?? "") (\(self.buildNumber ?? ""))" }
-    private var modelIdentifier: String {
-        // ref: https://www.theiphonewiki.com/wiki/Models
-        if let simulatorModelIdentifier = ProcessInfo().environment["SIMULATOR_MODEL_IDENTIFIER"] {
-            return simulatorModelIdentifier
-        }
-        var sysinfo = utsname()
-        uname(&sysinfo) // ignore return value
-        return String(bytes: Data(bytes: &sysinfo.machine,
-                                  count: Int(_SYS_NAMELEN)),
-                      encoding: .ascii)!.trimmingCharacters(in: .controlCharacters)
-    }
 
     /// 디버깅 시에 프린트를 보다 편하게 하기 위한 도구입니다.
     /// - Parameters:
@@ -156,24 +140,27 @@ public struct JSKit {
                             customBody body: String? = nil,
                             tintColor: UIColor? = nil,
                             in parentVC: UIViewController) {
-        let systemName = UIDevice.current.systemName
-        let systemVersion = UIDevice.current.systemVersion // 현재 사용자 iOS 버전
-        let appVersion = self.marketingVersion ?? ""
         let mailComposeVC = MFMailComposeViewController()
 
         /// Delegate: 메일 보내기 Finish 이후의 액션 정의를 위한 Delegate
         mailComposeVC.mailComposeDelegate = parentVC as? MFMailComposeViewControllerDelegate
-
-        /// configure mail contents
         mailComposeVC.setToRecipients([emailAddress]) // 받는 사람 설정
         mailComposeVC.setSubject(title) // 메일 제목 설정
 
         /// 메일 내용 설정
+        let lineText = "\n\n\n\n\n- - - Please type your reply above this line - - -\n"
+
+        let device = Device.current
+        let marketingVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? ""
+        let buildNumber = Bundle.main.infoDictionary?["CFBundleVersion"] as? String ?? ""
+        let deviceInfoText = "# \(device.description) / \(device.systemName ?? "") \(device.systemVersion ?? "") / App ver.\(marketingVersion)(\(buildNumber))"
+
         let customBodyText: String = {
             guard let body else { return "" }
             return "\n\(body)"
         }()
-        mailComposeVC.setMessageBody("# \(self.modelIdentifier) / \(systemName) \(systemVersion) / App ver.\(appVersion)\(customBodyText)",
+
+        mailComposeVC.setMessageBody("\(lineText)\(deviceInfoText)\(customBodyText)",
                                      isHTML: false)
 
         /// App의 tintColor와 맞추고자 하면, tintColor 설정
