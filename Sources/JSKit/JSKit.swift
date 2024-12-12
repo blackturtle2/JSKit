@@ -153,7 +153,7 @@ public struct JSKit {
         let device = Device.current
         let marketingVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? ""
         let buildNumber = Bundle.main.infoDictionary?["CFBundleVersion"] as? String ?? ""
-        let deviceInfoText = "# \(device.description) / \(device.systemName ?? "") \(device.systemVersion ?? "") / App ver.\(marketingVersion)(\(buildNumber))"
+        let deviceInfoText = "# \(device.description) / \(device.systemName ?? "") \(device.systemVersion ?? "") / App ver. \(marketingVersion)(\(buildNumber))"
 
         let customBodyText: String = {
             guard let body else { return "" }
