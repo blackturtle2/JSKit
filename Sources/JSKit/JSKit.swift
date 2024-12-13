@@ -22,12 +22,12 @@ public struct JSKit {
     public func PRINT_LOG(_ messsage: Any? = nil,
                           codeName: String? = nil,
                           title: String? = nil,
+                          footer: String? = nil,
                           function: String = #function) {
 #if DEBUG
-        /// "\(Date()) \(#file.components(separatedBy: "/").last ?? "") \(#function) \(#line) 로그 내용"
         let codeName = codeName == nil ? "" : "[\(codeName ?? "")]"
         let function = "[\(function)]"
-        let title = title == nil ? "" : " \(title ?? "")"
+        let title = (title == nil) ? "" : " \(title ?? "")"
         var message: String {
             guard let messsage else { return "" }
             let strMessage = String(describing: messsage)
@@ -38,8 +38,9 @@ public struct JSKit {
                 return ": \(strMessage)"
             }
         }
+        let footer = (footer == nil) ? "" : " \(footer ?? "")"
 
-        print(">>>>> 📍 \(codeName)\(function)\(title)\(message)")
+        print(">>>>> 📍 \(codeName)\(function)\(title)\(message)\(footer)")
 #endif
     }
 
