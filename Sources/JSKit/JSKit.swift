@@ -137,6 +137,7 @@ public struct JSKit {
     ///   - emailAddress: String 타입의 이메일 주소
     ///   - parentView: MFMailComposeViewController를 띄우기 원하는 마더 뷰
     public func sendEmailTo(_ emailAddress: String,
+                            ccEmailAddress: [String]? = nil,
                             title: String,
                             customBody body: String? = nil,
                             tintColor: UIColor? = nil,
@@ -146,6 +147,7 @@ public struct JSKit {
         /// Delegate: 메일 보내기 Finish 이후의 액션 정의를 위한 Delegate
         mailComposeVC.mailComposeDelegate = parentVC as? MFMailComposeViewControllerDelegate
         mailComposeVC.setToRecipients([emailAddress]) // 받는 사람 설정
+        mailComposeVC.setCcRecipients(ccEmailAddress) // 참조 설정
         mailComposeVC.setSubject(title) // 메일 제목 설정
 
         /// 메일 내용 설정
