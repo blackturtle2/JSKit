@@ -9,7 +9,7 @@ import UIKit
 
 extension UIFont {
 
-    public func rounded(ofSize size: CGFloat, weight: UIFont.Weight) -> UIFont {
+    public class func rounded(ofSize size: CGFloat, weight: UIFont.Weight) -> UIFont {
         let systemFont = UIFont.systemFont(ofSize: size, weight: weight)
         let font: UIFont
 
