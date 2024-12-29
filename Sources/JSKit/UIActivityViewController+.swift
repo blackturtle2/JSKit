@@ -9,7 +9,7 @@ import UIKit
 
 extension UIActivityViewController {
 
-    func iPadAvailable(with parentVC: UIViewController?) {
+    public func iPadAvailable(with parentVC: UIViewController?) {
         guard let parentVC else { return }
         if let popoverController = self.popoverPresentationController {
             popoverController.sourceRect = CGRect(x: UIScreen.main.bounds.width / 2,
