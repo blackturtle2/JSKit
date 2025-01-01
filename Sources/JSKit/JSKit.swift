@@ -130,12 +130,24 @@ public struct JSKit {
         }
     }
 
+    public func goAppStoreForReviewAndRating(appStoreId: String, completion: (() -> Void)?) {
+        guard let appstoreURL = URL(string: "https://apps.apple.com/app/\(appStoreId)") else { return }
+        var components = URLComponents(url: appstoreURL, resolvingAgainstBaseURL: false)
+        components?.queryItems = [URLQueryItem(name: "action", value: "write-review")]
+
+        guard let writeReviewURL = components?.url else { return }
+        UIApplication.shared.open(writeReviewURL, options: [:], completionHandler: { success in
+            if success { completion?() }
+            return
+        })
+    }
+
     // MARK: - Send Email to Developer
 
-    /// 개발자에게 이메일 보내기 function // `import MessageUI` 필요
+    /// 개발자에게 이메일 보내기
+    /// `import MessageUI`로 `MFMailComposeViewControllerDelegate`를 extension으로 받아서 `mailComposeController(_:didFinishWith:error:)`에서 `controller.dismiss(animated: true)` 꼭 처리할 것
     /// - Parameters:
     ///   - emailAddress: String 타입의 이메일 주소
-    ///   - parentView: MFMailComposeViewController를 띄우기 원하는 마더 뷰
     public func sendEmailTo(_ emailAddress: String,
                             ccEmailAddress: [String]? = nil,
                             title: String,
@@ -151,19 +163,18 @@ public struct JSKit {
         mailComposeVC.setSubject(title) // 메일 제목 설정
 
         /// 메일 내용 설정
-        let lineText = "\n\n\n\n\n- - - Please type your reply above this line - - -\n"
+        let customBodyText: String = {
+            guard let body else { return "" }
+            return body
+        }()
 
+        let lineText = "\n\n\n\n\n- - - \(String(localized: "Please type your message above this line")) - - -\n"
         let device = Device.current
         let marketingVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? ""
         let buildNumber = Bundle.main.infoDictionary?["CFBundleVersion"] as? String ?? ""
         let deviceInfoText = "# \(device.description) / \(device.systemName ?? "") \(device.systemVersion ?? "") / App ver. \(marketingVersion)(\(buildNumber))"
 
-        let customBodyText: String = {
-            guard let body else { return "" }
-            return "\n\(body)"
-        }()
-
-        mailComposeVC.setMessageBody("\(lineText)\(deviceInfoText)\(customBodyText)",
+        mailComposeVC.setMessageBody("\(customBodyText)\(lineText)\(deviceInfoText)",
                                      isHTML: false)
 
         /// App의 tintColor와 맞추고자 하면, tintColor 설정

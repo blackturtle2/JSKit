@@ -1,8 +1,147 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
-      "OK" : { "extractionState" : "manual", "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "OK" } }, "zh-HK" : { "stringUnit" : { "state" : "translated", "value" : "好的" } }, "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "好的" } }, "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "好的" } }, "ja" : { "stringUnit" : { "state" : "translated", "value" : "わかりました" } }, "ko" : { "stringUnit" : { "state" : "translated", "value" : "확인" } }, "vi" : { "stringUnit" : { "state" : "translated", "value" : "ĐƯỢC RỒI" } } } },
-      "Cancel" : { "extractionState" : "manual", "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "Cancel" } }, "zh-HK" : { "stringUnit" : { "state" : "translated", "value" : "取消" } }, "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "取消" } }, "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "取消" } }, "ja" : { "stringUnit" : { "state" : "translated", "value" : "キャンセル" } }, "ko" : { "stringUnit" : { "state" : "translated", "value" : "취소" } }, "vi" : { "stringUnit" : { "state" : "translated", "value" : "Hủy bỏ" } } } }
+    "Cancel" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cancel"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "キャンセル"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "취소"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hủy bỏ"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "取消"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "取消"
+          }
+        },
+        "zh-HK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "取消"
+          }
+        }
+      }
+    },
+    "OK" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "OK"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "わかりました"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "확인"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ĐƯỢC RỒI"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "好的"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "好的"
+          }
+        },
+        "zh-HK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "好的"
+          }
+        }
+      }
+    },
+    "Please type your message above this line" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Please type your message above this line"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "この行の上にメッセージを入力してください"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "이 줄 위에 내용을 입력하세요"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vui lòng nhập tin nhắn của bạn phía trên dòng này"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "请在此行上方输入您的消息"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "請在此行上方輸入您的消息"
+          }
+        },
+        "zh-HK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "请在此行上方输入您的消息"
+          }
+        }
+      }
+    }
   },
   "version" : "1.0"
 }
