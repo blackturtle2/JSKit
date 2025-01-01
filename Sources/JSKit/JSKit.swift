@@ -130,6 +130,8 @@ public struct JSKit {
         }
     }
 
+    /// - Parameters:
+    ///     - appStoreId: `id1489018103`와 같이 id로 시작하는 앱스토어 ID
     public func goAppStoreForReviewAndRating(appStoreId: String, completion: (() -> Void)?) {
         guard let appstoreURL = URL(string: "https://apps.apple.com/app/\(appStoreId)") else { return }
         var components = URLComponents(url: appstoreURL, resolvingAgainstBaseURL: false)
@@ -140,6 +142,17 @@ public struct JSKit {
             if success { completion?() }
             return
         })
+    }
+
+    /// - Parameters:
+    ///     - appName: 공유할 때, URL과 함께 보내고자 하는 앱 이름
+    ///     - appStoreId: `id1489018103`와 같이 id로 시작하는 앱스토어 ID
+    public func shareApp(appName: String, appStoreId: String, in parentVC: UIViewController, completion: (() -> Void)?) {
+        let t = "\(appName) https://apps.apple.com/app/apple-store/\(appStoreId)?ct=RecommendToFriend"
+        let activityVC = UIActivityViewController(activityItems: [t],
+                                                  applicationActivities: nil)
+        activityVC.iPadAvailable(with: parentVC)
+        parentVC.present(activityVC, animated: true, completion: nil)
     }
 
     // MARK: - Send Email to Developer
@@ -168,11 +181,11 @@ public struct JSKit {
             return body
         }()
 
-        let lineText = "\n\n\n\n\n- - - \(String(localized: "Please type your message above this line")) - - -\n"
+        let lineText = "\n\n\n\n\n// \(String(localized: "Please type your message above this line")) //\n"
         let device = Device.current
         let marketingVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? ""
         let buildNumber = Bundle.main.infoDictionary?["CFBundleVersion"] as? String ?? ""
-        let deviceInfoText = "# \(device.description) / \(device.systemName ?? "") \(device.systemVersion ?? "") / App ver. \(marketingVersion)(\(buildNumber))"
+        let deviceInfoText = "\(device.description) / \(device.systemName ?? "") \(device.systemVersion ?? "") / App ver. \(marketingVersion)(\(buildNumber))"
 
         mailComposeVC.setMessageBody("\(customBodyText)\(lineText)\(deviceInfoText)",
                                      isHTML: false)
