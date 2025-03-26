@@ -10,36 +10,33 @@ import UIKit
 extension UIViewController {
 
     // MARK: - OK Button Alert
-    public func presentOkAlert(with parentVC: UIViewController,
+    public func presentOkAlert(title t: String = "",
                                message m: String,
-                               title t: String = "",
                                _ okHandler: @escaping ((UIAlertAction) -> Void)) {
         let alert = UIAlertController(title: t, message: m, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: String(localized: "OK"), style: .default, handler: okHandler))
 
         DispatchQueue.main.async {
-            parentVC.present(alert, animated: true, completion: nil)
+            self.present(alert, animated: true, completion: nil)
         }
     }
 
     // MARK: - OK / Cancel Button Alert
-    public func presentOkCancelAlert(with parentVC: UIViewController,
+    public func presentOkCancelAlert(title t: String = "",
                                      message m: String,
-                                     title t: String = "",
                                      _ okHandler: @escaping ((UIAlertAction) -> Void)) {
         let alert = UIAlertController(title: t, message: m, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: String(localized: "Cancel"), style: .cancel))
         alert.addAction(UIAlertAction(title: String(localized: "OK"), style: .default, handler: okHandler))
 
         DispatchQueue.main.async {
-            parentVC.present(alert, animated: true, completion: nil)
+            self.present(alert, animated: true, completion: nil)
         }
     }
 
     // MARK: - TextField / OK / Cancel Button Alert
-    public func presentOkCancelWithTextFieldAlert(with parentVC: UIViewController,
+    public func presentOkCancelWithTextFieldAlert(title t: String = "",
                                                   message m: String,
-                                                  title t: String = "",
                                                   placeholder p: String = "",
                                                   keyboardType: UIKeyboardType = .default,
                                                   textAlignment: NSTextAlignment = .left,
@@ -58,7 +55,7 @@ extension UIViewController {
         }))
 
         DispatchQueue.main.async {
-            parentVC.present(alert, animated: true, completion: nil)
+            self.present(alert, animated: true, completion: nil)
         }
     }
 
