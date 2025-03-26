@@ -46,6 +46,7 @@ public struct JSKit {
 
     // MARK: - OK and Cancel Button Alert
 
+    @available(*, deprecated, message: "UIViewController에서 presentOkAlert 사용")
     public func presentOkButtonAlert(with parentVC: UIViewController,
                                      message m: String,
                                      title t: String = "",
@@ -58,6 +59,7 @@ public struct JSKit {
         }
     }
 
+    @available(*, deprecated, message: "UIViewController에서 presentOkCancelAlert 사용")
     public func presentOkCancelButtonAlert(with parentVC: UIViewController,
                                     message m: String,
                                     title t: String = "",
