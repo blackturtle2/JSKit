@@ -30,4 +30,23 @@ extension UIView {
         self.layer.mask = mask
     }
 
+    @IBInspectable public var isCircle: Bool {
+        get {
+            return self.isCircle
+        }
+        set (needRadius) {
+            if needRadius {
+                self.layer.cornerRadius = self.layer.frame.width / 2
+            }
+        }
+    }
+
+    @IBInspectable public var cornerRadius: CGFloat {
+        get {
+            return self.cornerRadius
+        }
+        set (cornerRadius) {
+            self.layer.cornerRadius = cornerRadius
+        }
+    }
 }
