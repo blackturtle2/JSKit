@@ -30,6 +30,7 @@ extension UIView {
         self.layer.mask = mask
     }
 
+    /// https://blog.naver.com/traeumen927/221897997210
     @IBInspectable public var isCircle: Bool {
         get {
             return self.isCircle
