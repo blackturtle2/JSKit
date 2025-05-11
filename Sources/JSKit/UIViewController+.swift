@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SafariServices
 
 extension UIViewController {
 
@@ -57,6 +58,27 @@ extension UIViewController {
         DispatchQueue.main.async {
             self.present(alert, animated: true, completion: nil)
         }
+    }
+
+    // MARK: - Present SafariView
+
+    /// SFSafariViewController를 띄우는 함수
+    /// - Parameters:
+    ///   - parentView: 띄우기를 원하는 마더 뷰
+    ///   - stringUrl: String 타입의 URL
+    ///   - completion: SFSafariViewController를 띄운 후, 작동할 completion
+    public func presentSafariViewTo(_ stringUrl: String,
+                                    tintColor: UIColor? = nil,
+                                    in parentVC: UIViewController,
+                                    completion: (() -> Void)? = nil) {
+        guard let url = URL(string: stringUrl) else { return }
+
+        let safariVC = SFSafariViewController(url: url)
+        if let tintColor {
+            safariVC.preferredControlTintColor = tintColor
+        }
+
+        parentVC.present(safariVC, animated: true, completion: completion)
     }
 
 }
