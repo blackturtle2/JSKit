@@ -9,6 +9,21 @@ import UIKit
 
 extension UILabel {
 
+    public func fontSize(with fontSize: CGFloat, in ranges: [String]? = nil) {
+        guard let text = self.text,
+              let attributedText = self.attributedText else { return }
+        let font = UIFont.systemFont(ofSize: fontSize, weight: self.font.weight)
+        let mutableAttributedString = NSMutableAttributedString(attributedString: attributedText)
+
+        if let ranges = ranges {
+            ranges.forEach { mutableAttributedString.addAttribute(.font, value: font, range: (text as NSString).range(of: $0)) }
+        } else {
+            [text].forEach { mutableAttributedString.addAttribute(.font, value: font, range: (text as NSString).range(of: $0)) }
+        }
+
+        self.attributedText = mutableAttributedString
+    }
+
     public func setLineSpacing(with lineSpacing: CGFloat = 0.0, lineHeightMultiple: CGFloat = 0.0) {
         guard let labelText = self.text else { return }
 
