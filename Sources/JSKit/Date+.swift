@@ -92,20 +92,6 @@ extension Date {
         return f.string(from: self)
     }
 
-    // MARK: - WeekDay
-
-    public enum RC_Locale: String {
-        case en_US
-        case ko_KR
-    }
-
-    public func weekDayString(with locale: RC_Locale) -> String {
-        let f = DateFormatter()
-        f.dateFormat = "EEEE"
-        f.locale = Locale(identifier: locale.rawValue)
-        return f.string(from: self)
-    }
-
     // MARK: - Identifier
 
     /// yyyyMMdd는 `RC_Event의 식별자로 사용하고 있으므로 절대 건드리지 말 것!!!` ///
