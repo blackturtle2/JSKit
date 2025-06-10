@@ -1,15 +1,14 @@
 //
-//  UIActivityViewController.swift
+//  UIAlertController+.swift
 //  JSKit
 //
-//  Created by leejaesung on 12/30/24.
+//  Created by leejaesung on 6/11/25.
 //
 
 import UIKit
 
-extension UIActivityViewController {
+extension UIAlertController {
 
-    /// 공유하기 기능 작동시킬 때, 나오는 뷰컨트롤러 iPad 지원
     public func iPadAvailable(with parentVC: UIViewController?) {
         guard let parentVC else { return }
         if let popoverController = self.popoverPresentationController {
